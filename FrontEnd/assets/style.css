@@ -125,6 +125,50 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+.button-filter ul {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+}
+
+.button-filter ul li button {
+	all: unset;
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	text-align: center;
+	color: #1D6154;
+	border: #1D6154 1px solid;
+	border-radius: 60px;
+	padding : 10px  10px;
+	margin-top: 24px;
+	margin-bottom: 48px;
+	cursor: pointer;
+}
+
+.button-filter .btn-tous {
+	width: 100px;
+	box-sizing: border-box;
+}
+
+.button-filter .btn-objets {
+	width: 100px;
+	box-sizing: border-box;
+}
+
+.button-filter ul li button:hover {
+	color: white;
+	background-color: #1D6154;
+}
+
+.button-filter ul li button:active {
+	background-color: #0E2F28;
+	;
+}
+
+
 .gallery {
 	width: 100%;
 	display: grid;
