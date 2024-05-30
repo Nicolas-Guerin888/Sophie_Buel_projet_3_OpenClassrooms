@@ -36,6 +36,7 @@ function displayGallery(works, selector){
     });
 }
 
+
 // Blocs de code pour les boutons filtres //
 
 // Bouton Tous //
@@ -74,6 +75,7 @@ btnHotelsRestaurants.addEventListener('click', function() {
         console.log('bouton Hotels&restaurants cliqué')
         displayGallery(hotelRestoFiltre, ".gallery")
     })
-    
+
+
 
 

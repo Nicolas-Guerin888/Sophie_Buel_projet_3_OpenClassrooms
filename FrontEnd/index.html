@@ -9,7 +9,10 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/modale.css">
+	<script src="https://kit.fontawesome.com/0f62163b16.js" crossorigin="anonymous"></script>
 	<script src="works.js" defer></script>
+	<script src="modale.js" defer></script>
 </head>
 <body>
 <header>
@@ -18,7 +21,7 @@
 		<ul>
 			<li><a href="index.html">projets</a></li>
 			<li><a href="#anchor">contact</a></li>
-			<li><a href="login.html">login</a></li>
+			<li><a id="login-logout" href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -61,6 +64,20 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+	<a class="btn-open-modal" href="#modal1">Ouvrir la modale</a>
+	<aside id="modal1" class="modal" style="display: none;">
+		<div class="modal-content">
+			<div class="btn-close-modal">
+				<button><i class="fa-solid fa-xmark"></i></button>
+			</div>
+			<i class="fa-solid fa-trash-can"></i>
+			<h3>Galerie photo</h3>
+			<div class="gallery-modal">
+			</div>
+			<hr>
+			<input type="submit" value="Ajouter une photo">
+		</div>
+	</aside>
 </main>
 <footer>
 	<nav>
