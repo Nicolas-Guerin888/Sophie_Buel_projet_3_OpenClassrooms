@@ -16,6 +16,10 @@
 	<script src="modale.js" defer></script>
 </head>
 <body>
+	<div class="mode-edition" style = "display: none">
+		<i class="fa-regular fa-pen-to-square"></i>
+		<p>Mode édition</p>
+	</div>
 <header>
 	<a href="index.html"><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1></a>
 	<nav>
@@ -40,7 +44,13 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="mes-projets-modifier">
+			<h2>Mes Projets</h2>
+			<button class="btn-open-modal">
+				<i class="fa-regular fa-pen-to-square" style=" display: none;"></i>
+				<p style="display: none;">modifier</p>	
+			</button>
+		</div>
 		<div class="button-filter">
 		</div>
 		<div class="gallery">
@@ -59,18 +69,45 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
-	<a class="btn-open-modal" href="#modal1">Ouvrir la modale</a>
-	<aside id="modal1" class="modal" style="display: none;">
-		<div class="modal-content">
+	<aside id="modal1" class="modal" style="display: none">
+		<div class="modal-window">
 			<div class="btn-close-modal">
 				<button><i class="fa-solid fa-xmark"></i></button>
 			</div>
-			<i class="fa-solid fa-trash-can"></i>
-			<h3>Galerie photo</h3>
-			<div class="gallery-modal">
+			<div class="modal-content">
+				<h3>Galerie photo</h3>
+				<div class="gallery-modal">
+				</div>
+				<hr>
+				<input class="open-modal2" type="submit" value="Ajouter une photo">
 			</div>
-			<hr>
-			<input type="submit" value="Ajouter une photo">
+		</div>
+	</aside>
+	<aside id="modal2" class="modal" style="display: none">
+		<div class="modal-window">
+			<div class="head">
+				<div class="btn-retour-modal1">
+					<i class="fa-solid fa-arrow-left"></i>
+				</div>
+				<div class="btn-close-modal2">
+					<button><i class="fa-solid fa-xmark"></i></button>
+				</div>
+			</div>
+			<div class="modal-content">
+				<h3>Ajout photo</h3>
+				<div class="container-ajout-photo">
+					<i class="fa-regular fa-image"></i>
+					<input type="submit" value="+ Ajouter photo">
+					<p>jpg, png : 4mo max</p>
+				</div>
+				<label for="title">Titre</label>
+				<input type="text" name="title" id="title">
+				<label for="categorie">Catégorie</label>
+				<select name="categorie" id="categorie">
+				</select>
+				<hr>
+				<input type="submit" value="Valider">
+			</div>
 		</div>
 	</aside>
 </main>

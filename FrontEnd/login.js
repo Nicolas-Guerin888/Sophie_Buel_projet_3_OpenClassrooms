@@ -1,9 +1,9 @@
 // Fonction pour traiter le formulaire Login
+// Le code spécifié doit être exécuté lorsque le page login.html est entièrement chargée
 document.addEventListener("DOMContentLoaded", () => {
     const formulaireLogin = document.querySelector(".formulaire-login")
     formulaireLogin.addEventListener("submit",(event) => {
         event.preventDefault()
-        console.log("test")
         // Création d'un objet contenant les valeurs du formulaire login. 
         const login = {
             email: event.target.querySelector("[name=email]").value,
@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Création de la charge utile au format JSON
         const chargeUtile = JSON.stringify(login)
-        //Appel de la fonction fetch avec comme deuxième argument un objet de configuration
+
+       // Envoi d'une requête POST /users/login
         fetch("http://localhost:5678/api/users/login", {
             method: "POST",
             headers: { "Content-Type": "application/json"},
@@ -21,13 +22,16 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             const token = data.token
-            console.log(token)
             sessionStorage.setItem('token', token)
-            window.location.href = "index.html"
+            // Condition en cas de bon ou mauvais email ou mot de passe
+            if (token === undefined) {
+                alert ("Mot de passe ou Adresse mail incorrect.")
+            } else {
+                window.location.href = "index.html"
+            }
         })
         .catch(error => {
             console.log(error)
-            alert ("Mot de passe ou Adresse mail incorrect.")
         })
-    });
-});  
+    })
+})
