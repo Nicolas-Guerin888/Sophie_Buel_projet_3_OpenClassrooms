@@ -1,18 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+// Code pour changer le bouton d'accueil login en logout
+// et pour effacer le token de sessionStorage lorsque deconnexion
     const loginLogout = document.getElementById("login-logout")
     if(sessionStorage.getItem("token")) {
         loginLogout.textContent = "logout"
         loginLogout.addEventListener("click", (e) => {
             sessionStorage.clear()
         })
-        const modeEdition = document.querySelector('.mode-edition')
-        modeEdition.setAttribute("style", "display: null")
-        const buttonFilter = document.querySelector('.button-filter')
-        buttonFilter.setAttribute("style", "display: none")
-        const logoModifier = document.querySelector('.mes-projets-modifier i, .mes-projets-modifier p')
-        logoModifier.setAttribute("style", "display: null" )
-        const textModifier = document.querySelector('.mes-projets-modifier p')
-        textModifier.setAttribute("style", "display: null" )
+    
+// Code pour gestion des éléments (boutons filtres, bandeau noir, bouton modifier)
+// apparaissant et disparaissant en mode edition
+    const modeEdition = document.querySelector('.mode-edition')
+    modeEdition.setAttribute("style", "display: null")
+    const buttonFilter = document.querySelector('.button-filter')
+    buttonFilter.setAttribute("style", "display: none")
+    const logoModifier = document.querySelector('.mes-projets-modifier i, .mes-projets-modifier p')
+    logoModifier.setAttribute("style", "display: null" )
+    const textModifier = document.querySelector('.mes-projets-modifier p')
+    textModifier.setAttribute("style", "display: null" )
 
     
    
@@ -72,7 +78,7 @@ document.addEventListener("click", (event) => {
     }
 })
 
-
+// Code permettant l'affichage de la gallerie des works dans la modale 1
 fetch('http://localhost:5678/api/works')
 .then(response => response.json())
 .then(data => { 
@@ -90,18 +96,63 @@ function displayGallery(works, selector){
         const img = document.createElement("img")
         img.src = work.imageUrl
         img.alt = work.title
-
+    // Ajout bouton "Garbage" et suppression du work dans le DOM et l'API
         const i = document.createElement("i")
         i.className = "fa-solid fa-trash-can"
-        /*i.addEventListener("click", () => {
-            // Fonctionnalité pour supprimer l'image
-            figure.remove();
-        })*/
-
-
+        i.addEventListener("click", () => {
+            figure.remove()
+            deleteWorkAPI(work.id)
+            console.log(work.id)
+    //************************************************* */
+        })
+        
         figure.appendChild(i)
         figure.appendChild(img)
         gallery.appendChild(figure)
-    });
-    }}
+    })
+}}
+
+// Fonction permettant de récupérer le token et faire une requête DELETE 
+// auprès de l'API
+function deleteWorkAPI(id) {
+    const token= sessionStorage.getItem("token")
+    fetch(`http://localhost:5678/api/works/${id}`, {
+        method: 'DELETE',
+        headers: {'Authorization': 'Bearer ' + token}
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('La requête DELETE n\'a pas abouti')
+        }
+        console.log(`Le Work avec l\'id ${id} a bien été effacer de l\'API`)
+
+    })
+    .catch(error => console.log(error))
+}
+
+
+})    
+//************************************************************************ */
+
+
+// Bloc de code permettant d'afficher les catégories dans le menu déroulant 
+// de la modale 2
+fetch('http://localhost:5678/api/categories')
+.then(response => response.json())
+.then(data => {
+    categories = data
+    console.log(categories)
+    ajoutOption (categories, '.categorie')
 })
+.catch(error => console.log(error))
+
+function ajoutOption (categories, selector) {
+    const select = document.querySelector(selector)
+    select.innerHTML = ''
+    categories.forEach(categorie => {
+        const option = document.createElement('option')
+        option.textContent = categorie.name
+        select.appendChild(option)
+    })
+}
+//****************************************************************************** */
