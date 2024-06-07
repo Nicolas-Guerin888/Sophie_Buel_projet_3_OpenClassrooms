@@ -136,23 +136,150 @@ function deleteWorkAPI(id) {
 
 
 // Bloc de code permettant d'afficher les catégories dans le menu déroulant 
-// de la modale 2
+// de la modale 2 et de récupérer l'ID de la catégorie
+{
 fetch('http://localhost:5678/api/categories')
 .then(response => response.json())
 .then(data => {
     categories = data
     console.log(categories)
     ajoutOption (categories, '.categorie')
+    recupIdCategorie()
 })
 .catch(error => console.log(error))
 
 function ajoutOption (categories, selector) {
     const select = document.querySelector(selector)
     select.innerHTML = ''
+
+    const optionVide = document.createElement('option')
+    optionVide.textContent = ''
+    select.appendChild(optionVide)
+
     categories.forEach(categorie => {
         const option = document.createElement('option')
         option.textContent = categorie.name
+        option.value = categorie.id
         select.appendChild(option)
     })
 }
+}
 //****************************************************************************** */
+
+document.addEventListener("DOMContentLoaded", () => {
+    let image
+    let titre
+    let idCategorie
+    const token= sessionStorage.getItem("token")
+    
+    const btnPhotoNewWork = document.getElementById("btn-ajout-photo")
+    btnPhotoNewWork.addEventListener("click", (event) => {
+        event.preventDefault()
+        const input = document.createElement("input")
+        input.type = "file"
+        input.accept = ".png, .jpg, .jpeg"
+        input.style.display = "none"
+        document.body.appendChild(input)    
+        input.click()
+        input.addEventListener("change", () => {
+            let photo = input.files[0]
+            image = photo
+            const maxSize = 4 * 1024 * 1024
+
+            if (photo.size > maxSize) {
+                alert("Veuillez sélectionner un fichier de moins de 4 Mo.")
+            } else {
+                console.log("Photo ajoutée :", image)
+            
+                // Création d'une miniature de la photo sélectionnée
+                let url = URL.createObjectURL(photo)
+                let img = document.createElement("img")
+                img.src = url
+                img.style.objectFit = "cover"
+                img.height = 169
+                const containerAjoutPhoto = document.querySelector(".container-ajout-photo")
+                let container = document.querySelector(".container-ajout-photo")
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild)
+                }
+                containerAjoutPhoto.appendChild(img)
+                modifierCouleurBtn()
+                //************************************************* */
+            }
+            document.body.removeChild(input)
+        })
+    })
+    
+    
+    const inputTitreNewWork = document.getElementById("title-new-work")
+    inputTitreNewWork.addEventListener("change", () => {
+            titre = inputTitreNewWork.value 
+            console.log("Titre :", titre)
+            modifierCouleurBtn()
+        })
+
+        function recupIdCategorie() { 
+            const ChampCategorie = document.getElementById("categorie-new-work")
+            ChampCategorie.addEventListener("change", (event) => {
+                idCategorie = event.target.value
+                console.log("l'ID catégorie sélectionné est", idCategorie)
+                modifierCouleurBtn()
+            })
+        }
+        
+        idCategorie = recupIdCategorie() 
+
+
+    const validerFormulaire = document.getElementById("btn-valider-new-work")
+    validerFormulaire.addEventListener("click", (event) => {
+        event.preventDefault()
+
+        if (!image || !titre || !idCategorie) {
+            alert("Veuillez remplir tous les champs.")
+            return
+        } 
+
+        const chargeUtile = new FormData()
+        chargeUtile.append("image", image)
+        chargeUtile.append("title", titre)
+        chargeUtile.append("category", idCategorie) 
+
+        console.log("FormData à envoyer:", {
+            image: image,
+            title: titre,
+            category: idCategorie
+        })
+        
+
+        fetch('http://localhost:5678/api/works', {
+            method: "POST",
+            headers: {"Authorization": "Bearer " + token},
+            body: chargeUtile
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('La requête POST n\'a pas abouti')
+            }
+            return response.json()
+        })
+        .then(data => {
+            alert("Votre nouveau projet a été ajoutée avec succès !")
+            console.log(data)
+        })
+        .catch(error => console.log(error))
+        })
+
+
+        function modifierCouleurBtn () {
+            if (image && titre && idCategorie) {
+                validerFormulaire.style.backgroundColor = "#1D6154"
+                validerFormulaire.disabled = false
+            } else {
+                validerFormulaire.style.backgroundColor = ""
+                validerFormulaire.disabled = true
+            }
+        }
+        modifierCouleurBtn()
+
+})
+

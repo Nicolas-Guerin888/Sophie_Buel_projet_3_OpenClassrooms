@@ -116,6 +116,10 @@ hr {
     font-size: 20px;
 }
 
+.modal-content h3 {
+    text-align: center;
+}
+
 #modal2 .modal-window .head .btn-retour-modal1 {
     font-size: 20px;
     cursor: pointer;
