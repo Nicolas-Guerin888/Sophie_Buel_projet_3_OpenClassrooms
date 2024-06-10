@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const formulaireLogin = document.querySelector(".formulaire-login")
     formulaireLogin.addEventListener("submit",(event) => {
         event.preventDefault()
+
         // Création d'un objet contenant les valeurs du formulaire login. 
         const login = {
             email: event.target.querySelector("[name=email]").value,
@@ -22,12 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             const token = data.token
-            sessionStorage.setItem('token', token)
+            sessionStorage.setItem('token', token) // Stockage du token dans le sessionStorage
+
             // Condition en cas de bon ou mauvais email ou mot de passe
             if (token === undefined) {
                 alert ("Mot de passe ou Adresse mail incorrect.")
             } else {
-                window.location.href = "index.html"
+                window.location.href = "index.html" // Redirection vers la page d'accueil si le login est réussi
             }
         })
         .catch(error => {
