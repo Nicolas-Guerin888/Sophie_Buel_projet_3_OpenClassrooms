@@ -173,7 +173,11 @@ li:hover {
 
 .button-filter ul li button:active {
 	background-color: #0E2F28;
-	;
+}
+
+.button-filter ul li button.selected {
+    color: white;
+    background-color: #1D6154;
 }
 
 .gallery {

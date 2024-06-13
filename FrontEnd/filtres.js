@@ -29,11 +29,19 @@ function ajoutBoutonFiltre (categories, selector) {
     buttonFilter.innerHTML = ''
     const ul = document.createElement('ul')
     buttonFilter.appendChild(ul)
+    // Fonction pour gérer la couleur de sélection du bouton actif
+    function changerCouleurBtnSelectionne(event) {
+        document.querySelectorAll('.button-filter ul li button').forEach(button => {
+            button.classList.remove('selected')
+        })
+        event.target.classList.add('selected')
+    }
     // Création du bouton "Tous"
     const liButtonTous = document.createElement('li')
     const buttonTous = document.createElement('button')
     buttonTous.textContent = 'Tous'
-    buttonTous.className = 'btn-tous'
+    buttonTous.className = 'btn-tous selected'
+    buttonTous.addEventListener('click', changerCouleurBtnSelectionne)
     liButtonTous.appendChild(buttonTous)
     ul.appendChild(liButtonTous)
     //-----------------------------------//
@@ -42,6 +50,7 @@ function ajoutBoutonFiltre (categories, selector) {
         const button = document.createElement("button")
         button.textContent = categorie.name
         button.className = 'btn-filter'
+        button.addEventListener('click', changerCouleurBtnSelectionne)
         ul.appendChild(li)
         li.appendChild(button)
     })
@@ -51,13 +60,13 @@ function ajoutBoutonFiltre (categories, selector) {
 function filtreRequeteWorks (works) {
     document.querySelectorAll('.btn-filter').forEach(button => {
         button.addEventListener('click', () => {
-            const categorieName = button.textContent;
+            const categorieName = button.textContent
             const filtreWorks = works.filter(work => 
-                work.category.name === categorieName);
-            console.log(filtreWorks);
-            afficherFiltreGallery(filtreWorks, ".gallery");
-        });
-    });
+                work.category.name === categorieName)
+            console.log(filtreWorks)
+            afficherFiltreGallery(filtreWorks, ".gallery")
+        })
+    })
 }
 
 // Fonction permettant d'afficher les éléments de galerie dans la page HTML
@@ -74,7 +83,7 @@ function afficherFiltreGallery(works, selector){
         figureCaption.textContent = work.title
         figure.appendChild(figureCaption)
         gallery.appendChild(figure)
-    });
+    })
 }
 
 // Fonction permettant d'afficher l'ensemble de la galerie dans la page HTML
@@ -86,3 +95,20 @@ function filtreBtnTous (works) {
 console.log('Bouton tous cliqué')
 })
 }
+
+// Sélectionnez tous les boutons de filtre
+const boutons = document.querySelectorAll('.button-filter ul li');
+
+// Parcourez chaque bouton
+for (let i = 0; i < boutons.length; i++) {
+    // Ajoutez un écouteur d'événements de clic à chaque bouton
+    boutons[i].addEventListener('click', function() {
+        // Retirez la classe 'selected' de tous les boutons
+        for (var j = 0; j < boutons.length; j++) {
+            boutons[j].classList.remove('selected');
+        }
+        // Ajoutez la classe 'selected' au bouton cliqué
+        this.classList.add('selected');
+    });
+}
+

@@ -29,22 +29,26 @@ document.addEventListener("DOMContentLoaded", () => {
     {
         // Code pour gérer l'ouverture de la modale au click du bouton modifier
         const openModal = document.querySelector(".btn-open-modal")
-        openModal.addEventListener("click", () => {
+        openModal.addEventListener("click", (e) => {
+            e.preventDefault()
             const modal = document.getElementById("modal1")
             modal.setAttribute("style", "display: null")
             console.log("je clique sur le bouton modale")
         })
 
+
         // Code pour gérer la fermeture de la modale 1 au click de la croix
         const closeModal = document.querySelector(".btn-close-modal")
-        closeModal.addEventListener("click", () => {
+        closeModal.addEventListener("click", (e) => {
+            e.preventDefault()
             const modal = document.getElementById("modal1")
             modal.setAttribute("style", "display: none")
         })
 
         // Code pour passer de la modale 1 à la modale 2
         const openModal2 = document.querySelector(".open-modal2")
-        openModal2.addEventListener("click", () => {
+        openModal2.addEventListener("click", (e) => {
+            e.preventDefault()
             const modal = document.getElementById("modal1")
             modal.setAttribute("style", "display: none")
             const modal2 = document.getElementById("modal2")
@@ -54,7 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Code pour retourner de la modale 2 à la modale 1
         const returnModal1 = document.querySelector(".btn-retour-modal1")
-        returnModal1.addEventListener("click", () => {
+        returnModal1.addEventListener("click", (e) => {
+            e.preventDefault()
             const modal2 = document.getElementById("modal2")
             modal2.setAttribute("style", "display: none")
             const modal = document.getElementById("modal1")
@@ -64,7 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Code pour gérer la fermeture de la modale 2 au click de la croix
         const closeModal2 = document.querySelector(".btn-close-modal2")
-        closeModal2.addEventListener("click", () => {
+        closeModal2.addEventListener("click", (e) => {
+            e.preventDefault()
             const modal2 = document.getElementById("modal2")
             modal2.setAttribute("style", "display: none")
             console.log("Je clique sur le bouton de fermeture de la modale 2")
@@ -105,10 +111,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const img = document.createElement("img")
                 img.src = work.imageUrl
                 img.alt = work.title
-            // Ajout bouton "Garbage" et suppression du work dans le DOM et l'API
+            // Ajout bouton "Garbage" et suppression du work dans le DOM
                 const i = document.createElement("i")
                 i.className = "fa-solid fa-trash-can"
-                i.addEventListener("click", () => {
+                i.addEventListener("click", (e) => {
+                    e.preventDefault()
                     figure.remove()
                     deleteWorkAPI(work.id)
                     console.log(work.id)
@@ -294,16 +301,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => console.log(error))
         })
 
-        // Modification de la couleur du bouton valider lorsque l'ensemble des champs sont remplis
-        function modifierCouleurBtn () {
-            if (image && titre && idCategorie) {
-                validerFormulaire.style.backgroundColor = "#1D6154"
-                validerFormulaire.disabled = false
-            } else {
-                validerFormulaire.style.backgroundColor = ""
-                validerFormulaire.disabled = true
-            }
-        }
     }
 })
 
