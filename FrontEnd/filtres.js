@@ -4,7 +4,6 @@ fetch('http://localhost:5678/api/categories')
 .then(response => response.json())
 .then(data => {
     categories = data
-    console.log(categories)
     ajoutBoutonFiltre (categories, '.button-filter')
 })
 .catch(error => console.log(error))
@@ -15,7 +14,6 @@ fetch('http://localhost:5678/api/works')
 .then(response => response.json())
 .then(data => { 
     works = data
-    console.log(works)
     filtreRequeteWorks (works)
     afficherFiltreGallery(works, ".gallery")
     filtreBtnTous (works)
@@ -63,7 +61,6 @@ function filtreRequeteWorks (works) {
             const categorieName = button.textContent
             const filtreWorks = works.filter(work => 
                 work.category.name === categorieName)
-            console.log(filtreWorks)
             afficherFiltreGallery(filtreWorks, ".gallery")
         })
     })
@@ -92,8 +89,7 @@ function filtreBtnTous (works) {
     const eventBtnTous = document.querySelector('.btn-tous')
     eventBtnTous.addEventListener('click', function() {
     displayGallery(works, ".gallery")
-console.log('Bouton tous cliqué')
-})
+    })
 }
 
 // Sélectionnez tous les boutons de filtre

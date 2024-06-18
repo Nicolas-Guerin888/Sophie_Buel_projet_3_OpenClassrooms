@@ -30,7 +30,7 @@ function displayGallery(works, selector){
         figure.appendChild(figureCaption)
 
         gallery.appendChild(figure)
-    });
+    })
 }
 
 
