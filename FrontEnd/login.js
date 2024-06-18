@@ -23,12 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             const token = data.token
-            sessionStorage.setItem('token', token) // Stockage du token dans le sessionStorage
 
             // Condition en cas de bon ou mauvais email ou mot de passe
             if (token === undefined) {
                 alert ("Mot de passe ou Adresse mail incorrect.")
             } else {
+                sessionStorage.setItem('token', token) // Stockage du token dans le sessionStorage
                 window.location.href = "index.html" // Redirection vers la page d'accueil si le login est réussi
             }
         })

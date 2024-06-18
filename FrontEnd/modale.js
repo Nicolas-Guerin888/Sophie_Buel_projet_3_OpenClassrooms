@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault()
             const modal = document.getElementById("modal1")
             modal.setAttribute("style", "display: null")
-            console.log("je clique sur le bouton modale")
         })
 
 
@@ -53,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
             modal.setAttribute("style", "display: none")
             const modal2 = document.getElementById("modal2")
             modal2.setAttribute("style", "display: null")
-            console.log("Je clique sur le bouton d'ouverture de la modale 2")
         })
 
         // Code pour retourner de la modale 2 à la modale 1
@@ -64,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
             modal2.setAttribute("style", "display: none")
             const modal = document.getElementById("modal1")
             modal.setAttribute("style", "display: null")
-            console.log("Je clique sur le bouton de retour vers la modale 1")
         })
 
         // Code pour gérer la fermeture de la modale 2 au click de la croix
@@ -73,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault()
             const modal2 = document.getElementById("modal2")
             modal2.setAttribute("style", "display: none")
-            console.log("Je clique sur le bouton de fermeture de la modale 2")
         })
 
         // Code pour gérer la fermeture des fenêtre modales au click à l'extérieur
@@ -118,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     e.preventDefault()
                     figure.remove()
                     deleteWorkAPI(work.id)
-                    console.log(work.id)
             //************************************************* */
                 })
                 
@@ -140,8 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!response.ok) {
                     throw new Error('La requête DELETE n\'a pas abouti')
                 }
-                console.log(`Le Work avec l\'id ${id} a bien été effacer de l\'API`)
-
             })
             .catch(error => console.log(error))
         }
@@ -155,7 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             categories = data
-            console.log(categories)
             ajoutOption (categories, '.categorie')
             recupIdCategorie()
         })
@@ -215,8 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (photo.size > maxSize) {
                     alert("Veuillez sélectionner un fichier de moins de 4 Mo.")
-                } else {
-                    console.log("Photo ajoutée :", image)
                 
                     // Création d'une miniature de la photo sélectionnée
                     let url = URL.createObjectURL(photo)
@@ -241,7 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const inputTitreNewWork = document.getElementById("title-new-work")
         inputTitreNewWork.addEventListener("change", () => {
                 titre = inputTitreNewWork.value 
-                console.log("Titre :", titre)
                 modifierCouleurBtn()
             })
 
@@ -250,7 +239,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const ChampCategorie = document.getElementById("categorie-new-work")
             ChampCategorie.addEventListener("change", (event) => {
                 idCategorie = event.target.value
-                console.log("l'ID catégorie sélectionné est", idCategorie)
                 modifierCouleurBtn()
             })
         }   
@@ -276,12 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
         chargeUtile.append("title", titre)
         chargeUtile.append("category", idCategorie) 
 
-        console.log("FormData à envoyer:", {
-            image: image,
-            title: titre,
-            category: idCategorie
-        })
-            
+           
         // Requête POST à l'API et gestion de la réponse
         fetch('http://localhost:5678/api/works', {
             method: "POST",
@@ -296,7 +279,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(data => {
             alert("Votre nouveau projet a été ajoutée avec succès !")
-            console.log(data)
         })
         .catch(error => console.log(error))
         })
