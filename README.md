@@ -1,8 +1,30 @@
-# Portfolio-architecte-sophie-bluel
+Site Sophie Bluel
 
-Code du projet 6 d'intégrateur web.
+![Aperçu du site Sophie Bluel](Frontend/assets/images/Capture%20d'écran%202024-10-31%20123128.png)
 
-## Information pour le lancer le code
+Ce dépôt correspond au projet 3 de la formation Développeur Web d'OpenClassrooms.
 
- - Lancer le backend depuis votre terminal en suivant les instruction du fichier ReadMe.
- - Si vous désirez afficher le code du backend et du frontend, faites le dans 2 instances de VSCode différentes pour éviter tout problème
+Il consiste en la création d'une page d'accueil web dynamique avec JavaScript. 
+
+Les objectifs étaient : 
+- de gérer les événements utilisateurs avec JavaScript
+- de Manipuler les éléments du DOM avec JavaScript
+- de récupérer les données utilisteurs dans le JavaScript via des formulaires
+
+La technologie utilisée pour ce projet : 
+- HTML 5
+- CSS 3
+- JavaScript
+- Git et GitHub pour le versionning
+
+J'ai validé ce projet le 18 juin 2024.
+
+Les points forts de mes livrables : 
+- les événements utilisateurs sont correctement gérés
+- les works sont bien repris de l'API
+- les données sont bien récupérées via le formulaires
+- le code est propre et clair
+
+Mes difficultés pour ce projet : 
+- comprendre le fonctionnement d'une API et comprendre comment échanger avec elle
+- la gestion du DOM
