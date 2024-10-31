@@ -1,6 +1,6 @@
 Site Sophie Bluel
 
-![Aperçu du site Sophie Bluel](Frontend/assets/images/Capture%20d'écran%202024-10-31%20123128.png)
+![Aperçu du site Sophie Bluel](./FrontEnd/assets/images/image-readMe.png)
 
 Ce dépôt correspond au projet 3 de la formation Développeur Web d'OpenClassrooms.
 
